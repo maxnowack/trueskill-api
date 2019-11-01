@@ -6,6 +6,7 @@ require 'saulabs/trueskill'
 include Saulabs::TrueSkill
 
 set :port, ENV['PORT'] || 5000
+set :bind, '0.0.0.0'
 set :dump_errors, true
 set :raise_errors, false
 
