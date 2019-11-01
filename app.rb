@@ -13,15 +13,15 @@ set :raise_errors, false
 post '/' do
   data = JSON.parse(request.body.read)
 
-  players1 = data['team1'].map {|player| { 'userId' => player['userId'], 'rating' => Rating.new(player['mean'], player['deviation'], player['activity'])} }
-  players2 = data['team2'].map {|player| { 'userId' => player['userId'], 'rating' => Rating.new(player['mean'], player['deviation'], player['activity'])} }
+  players1 = data['team1']['players'].map {|player| { 'userId' => player['userId'], 'rating' => Rating.new(player['mean'], player['deviation'], player['activity'])} }
+  players2 = data['team2']['players'].map {|player| { 'userId' => player['userId'], 'rating' => Rating.new(player['mean'], player['deviation'], player['activity'])} }
 
   team1 = players1.map { |player| player['rating'] }
   team2 = players2.map { |player| player['rating'] }
 
 
   # team 1 wins by 10 points against team 2
-  graph = ScoreBasedBayesianRating.new(team1 => 10.0, team2 => -10.0)
+  graph = ScoreBasedBayesianRating.new(team1 => data['team1']['score'], team2 => data['team2']['score'])
 
   # update the Ratings
   graph.update_skills
