@@ -9,4 +9,5 @@ RUN bundle install
 
 ADD . /app
 
-ENTRYPOINT [ "/usr/bin/ruby", "/app/app.rb" ]
+
+ENTRYPOINT [ "/usr/local/bin/ruby", "/app/app.rb" ]
