@@ -37,7 +37,7 @@ post '/' do
 
   team2.each_index do |i|
     newData['team2'][i] = {
-      'userId' => players1[i]['userId'],
+      'userId' => players2[i]['userId'],
       'mean' => team2[i].mean,
       'deviation' => team2[i].deviation,
     }
